@@ -1,18 +1,27 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        hoem
+        {{currTime  |  FormatDate}}
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+    import { FormatDate } from '@/lib/utils'
+    export default {
+        name: 'Home',
+        components: {},
+        created() {
+            setInterval(() => {
+                this.currTime = FormatDate(new Date())
+            },1000)
+        },
+        data(){
+            return {
+                currTime:''
+            }
+        },
+    }
 </script>
+<style lang="scss" scoped>
+    
+</style>
