@@ -17,7 +17,7 @@
                         ref='pwd' @keyup.enter.native="submit">
                     </el-input>
                 </el-form-item>
-                <el-button type="primary" @click="submitForm">登录</el-button>
+                <el-button type="primary" @click="submit">登录</el-button>
                 <el-button @click="resetForm">重置</el-button>
                 <div class="remeber-pwd">
                     <el-checkbox v-model="checked">记住用户名和密码</el-checkbox>
@@ -28,8 +28,7 @@
 </template>
 <script>
     import { isMobile } from '@/lib/validate'
-    import { mapMutations } from 'vuex'
-
+    import types from '@/store/constants/types'
     export default {
         name: 'Login',
         data() {
@@ -63,18 +62,11 @@
         },
 
         methods: {
-            ...mapMutations(['setToken']),
             //重置按钮
             resetForm() {
                 this.$refs.ruleForm.resetFields()
             },
             //表单验证
-            submitForm() {
-                this.$refs.ruleForm.validate((valid) => {
-                    if (!valid) return false;
-                    this.login()
-                })
-            },
             submit() {
                 this.$refs.ruleForm.validate((valid) => {
                     if (!valid) return false;
@@ -85,11 +77,19 @@
             async login() {
                 let data = {
                     userAccount: this.loginForm.user,
-                    userPassword: this.loginForm.pwd,
+                    userPassword: this.$md5(this.loginForm.pwd),
                     type: 1
                 }
                 const res = await this.$post('pc/user/v1/login/pcpass', data)
-                console.log(res);
+                if (res.status == 200) {
+                    this.$message.success("登录成功！")
+                    let account = res.data.user.account
+                    let token = res.data.user.authKey
+                    this.$store.commit(types.SET_TOKEN,{ account, token })
+                    this.$router.push('/home')
+                } else {
+                    this.$message.error("登录失败！")
+                }
             }
 
         },

@@ -6,8 +6,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/login/fonts/iconfont.css'
 import {get, post, put, dell, download, form,json, upFile} from './network/request'
+import md5 from 'js-md5';
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.prototype.$md5 = md5;
 Vue.prototype.$get = get;
 Vue.prototype.$post = post;
 Vue.prototype.$json = json;

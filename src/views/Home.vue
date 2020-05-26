@@ -1,6 +1,8 @@
 <template>
     <div class="home">
         home
+        {{this.$store.state.account}}
+        {{this.$store.state.token}}
     </div>
 </template>
 
