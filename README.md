@@ -17,3 +17,5 @@ yarn build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### If my project is helpful to you, please light up my star，爱你呦

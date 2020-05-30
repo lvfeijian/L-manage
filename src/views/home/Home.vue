@@ -1,0 +1,153 @@
+<template>
+    <el-container class="home-container">
+        <!-- header -->
+        <el-header>
+            <img src="@/assets/logo.svg" alt="">
+            <div class="icon">
+                <i class="el-icon-refresh"></i>
+                <i class="el-icon-full-screen"></i>
+                <el-button @click='signOut'>
+                    退出
+                </el-button>
+            </div>
+
+        </el-header>
+
+        <el-container>
+            <!-- 侧边栏 -->
+            <el-aside :width="isCollapse ? '64px'  :  '260px'">
+                <div @click="toggleCollapse" class="toggle-collapse">|||</div>
+                <el-menu :default-openeds="['1']" background-color='#007766' text-color='#ccc' active-text-color='#fff'
+                    unique-opened :collapse="isCollapse" :collapse-transition="false">
+                    <el-submenu :index="index+''" v-for='(item,index) in routes'>
+                        <template slot="title">
+                            <i :class="item.iconcls"></i>
+                            <span>{{item.name}}</span>
+                        </template>
+                        <el-menu-item :index="v.name" v-for='(v,i) in item.children'>
+                            <span>{{v.name}}</span>
+                        </el-menu-item>
+                    </el-submenu>
+                </el-menu>
+
+
+
+            </el-aside>
+
+            <!-- right -->
+            <el-main>main</el-main>
+        </el-container>
+
+
+
+
+
+    </el-container>
+</template>
+
+<script>
+    import types from '@/store/constants/types'
+    export default {
+        name: 'Home',
+        components: {},
+        created() {
+
+        },
+        data() {
+            return {
+                routes: [
+                    {
+                        name: '首页',
+                        path: '/',
+                        iconcls: 'el-icon-s-home'
+                    },
+                    {
+                        name: '果园管理',
+                        iconcls: 'el-icon-menu',
+                        children: [
+                            {
+                                path: '/gygl',
+                                name: '果园列表'
+                            },
+                            {
+                                path: '/dklb',
+                                name: '地块列表'
+                            }
+                        ]
+                    },
+                    {
+                        name: '农事活动',
+                        iconcls: 'el-icon-s-custom',
+                        children: [
+                            {
+                                path: '/nsjl',
+                                name: '农事记录'
+                            },
+                            {
+                                path: '/zzjl',
+                                name: '种植记录'
+                            },
+                            {
+                                path: '/czjl',
+                                name: '采摘记录'
+                            }
+                        ]
+                    }
+                ],
+                isCollapse: false,
+            }
+        },
+        methods: {
+            //退出登录
+            signOut() {
+                this.$store.commit(types.DEL_TOKEN)
+                this.$router.push('/login')
+            },
+            //展开和折叠的切换按钮
+            toggleCollapse() {
+                this.isCollapse = !this.isCollapse
+            }
+        },
+    }
+</script>
+<style lang="scss" scoped>
+    .home-container {
+        height: 100vh;
+        width: 100vw;
+
+        .el-header {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .icon {
+                width: 12vw;
+                height: 100%;
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: space-around;
+
+                i {
+                    font-size: 20px;
+
+                    &:hover {
+                        color: #3a8ee6;
+                    }
+                }
+            }
+        }
+
+        .el-aside {
+            background-color: #007766;
+            .toggle-collapse{
+                letter-spacing: 3px;
+                color:#ccc;
+                text-align:center;
+                cursor: pointer;
+                margin: 10px 0;
+            }
+        }
+    }
+</style>

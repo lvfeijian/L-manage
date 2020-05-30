@@ -20,8 +20,7 @@ axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencod
 //http request 拦截器
 axios.interceptors.request.use(
     config => {
-        const token = localStorage['token'];
-        config.data = config.data;
+        const token = window.sessionStorage.getItem('token')
         if (token) {
             config.headers.Authorization = token
         }
@@ -39,7 +38,7 @@ axios.interceptors.response.use(
             alert('用户已经在其他地方登录')
             router.push({
                 path: "/login",
-                querry: { redirect: router.currentRoute.fullPath }//从哪个页面跳转
+                query: { redirect: router.currentRoute.fullPath }//从哪个页面跳转
             })
             localStorage.removeItem('token');
         }
