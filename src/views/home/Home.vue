@@ -12,30 +12,38 @@
             </div>
 
         </el-header>
-
         <el-container>
             <!-- 侧边栏 -->
             <el-aside :width="isCollapse ? '64px'  :  '260px'">
                 <div @click="toggleCollapse" class="toggle-collapse">|||</div>
                 <el-menu :default-openeds="['1']" background-color='#007766' text-color='#ccc' active-text-color='#fff'
-                    unique-opened :collapse="isCollapse" :collapse-transition="false">
-                    <el-submenu :index="index+''" v-for='(item,index) in routes'>
-                        <template slot="title">
+                    unique-opened :collapse="isCollapse" :collapse-transition="false" router>
+                    <template  v-for='(item,index) in routes'>
+                        <el-submenu :index="index+''" v-if='!item.isHide'>
+                            <template slot="title">
+                                <i :class="item.iconcls"></i>
+                                <span>{{item.name}}</span>
+                            </template>
+                            <el-menu-item :index="v.path" v-for='(v,i) in item.children'  v-if='!item.isHide'>
+                                <span>{{v.name}}</span>
+                            </el-menu-item>
+                        </el-submenu>
+                        <el-menu-item v-else :index='item.children[0].path'>
                             <i :class="item.iconcls"></i>
-                            <span>{{item.name}}</span>
-                        </template>
-                        <el-menu-item :index="v.name" v-for='(v,i) in item.children'>
-                            <span>{{v.name}}</span>
+                            <span>{{item.children[0].name}}</span>
                         </el-menu-item>
-                    </el-submenu>
+                    </template>
+                    
                 </el-menu>
 
 
 
             </el-aside>
 
-            <!-- right -->
-            <el-main>main</el-main>
+            <!-- 主体区域 -->
+            <el-main>
+                <router-view></router-view>
+            </el-main>
         </el-container>
 
 
@@ -59,18 +67,26 @@
                     {
                         name: '首页',
                         path: '/',
-                        iconcls: 'el-icon-s-home'
+                        iconcls: 'el-icon-s-home',
+                        isHide:true,
+                        children:[
+                            {
+                                path:'/welcome',
+                                name:'首页'
+                            }
+                        ]
                     },
                     {
                         name: '果园管理',
                         iconcls: 'el-icon-menu',
+                        path: '/',
                         children: [
                             {
-                                path: '/gygl',
+                                path: '/massifList',
                                 name: '果园列表'
                             },
                             {
-                                path: '/dklb',
+                                path: '/orchardList',
                                 name: '地块列表'
                             }
                         ]
