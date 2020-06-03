@@ -3,6 +3,9 @@
         <!-- header -->
         <el-header>
             <img src="@/assets/logo.svg" alt="">
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item :to="{ path: '/' }" v-for='item in this.$route.matched'>{{item.name}}</el-breadcrumb-item>
+            </el-breadcrumb>
             <div class="icon">
                 <i class="el-icon-refresh"></i>
                 <i class="el-icon-full-screen"></i>
@@ -41,7 +44,7 @@
             </el-aside>
 
             <!-- 主体区域 -->
-            <el-main>
+            <el-main class="main">
                 <router-view></router-view>
             </el-main>
         </el-container>
@@ -113,6 +116,9 @@
                 isCollapse: false,
             }
         },
+        mounted() {
+            
+        },
         methods: {
             //退出登录
             signOut() {
@@ -130,6 +136,7 @@
     .home-container {
         height: 100vh;
         width: 100vw;
+        overflow: hidden;
 
         .el-header {
             background-color: #fff;

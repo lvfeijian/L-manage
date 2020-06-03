@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//解决Vue中重复点击相同路由控制台报错问题
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,21 +20,31 @@ const routes = [
     },
     {
         path: '/home',
-        name: 'Home',
-        component: () => import('@/views/home/Home.vue'),
+        name: '首页',
+        component: () => import('@/views/Main.vue'),
         redirect:'/welcome',
         children:[
             {
                 path:'/welcome',
-                name: 'Welcome',
-                component:() => import('@/views/Welcome.vue')
+                name: '欢迎界面',
+                component:() => import('@/views/home/Welcome.vue')
             },
+           
+        ]
+    },
+    {
+        path: '/home',
+        name: '果园管理',
+        component: () => import('@/views/Main.vue'),
+        children:[
             {
                 path:'/massifList',
+                name: '果园列表',
                 component:() => import('@/views/manage/massifList.vue')
             },
             {
                 path:'/orchardList',
+                name: '地块列表',
                 component:() => import('@/views/manage/massifList.vue')
             }
         ]
