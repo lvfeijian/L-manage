@@ -80,7 +80,11 @@
                     userPassword: this.$md5(this.loginForm.pwd),
                     type: 1
                 }
-                const res = await this.$post('pc/user/v1/login/pcpass', data)
+                const res = await this.$axios({
+                    method:'post',
+                    url:'pc/user/v1/login/pcpass',
+                    data:data
+                })
                 if (res.status == 200) {
                     this.$message.success("登录成功！")
                     let account = res.data.user.account

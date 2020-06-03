@@ -5,9 +5,14 @@ import types from '@/store/constants/types'
 
 const Qs = require('qs')
 axios.defaults.baseURL = '/orchard/pc/api/';
+axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // 请求发送之前的拦截器
 axios.interceptors.request.use(config => {
+    const token = window.sessionStorage.getItem('token')
+    if (token) {
+        config.headers.Authorization = token
+    }
     return config
 }, error => {
     return Promise.reject(error)
@@ -29,9 +34,6 @@ export default function (options) {
     }
     if (/get/i.test(options.method) && !options.headers) {
         options.url += ('?' + Qs.stringify(options.data))
-    }
-    if (!/json/.test(options.url) && !options.url.startsWith('http')) {
-        options.url = config.baseUrl + options.url
     }
     return new Promise((resolve, reject) => {
         axios.request(options).then(res => {

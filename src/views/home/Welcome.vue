@@ -41,8 +41,6 @@ export default {
         this.$store.dispatch(nameSpaced + types.GET_WELCOME)
         this.$store.dispatch(nameSpaced + types.GET_WELCOME_CHART)
     },
-    mounted() {
-    },
 }
 </script>
 <style lang="scss">
