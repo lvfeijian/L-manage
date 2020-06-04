@@ -45,7 +45,7 @@ const routes = [
             {
                 path:'/orchardList',
                 name: '地块列表',
-                component:() => import('@/views/manage/massifList.vue')
+                component:() => import('@/views/manage/orchardList.vue')
             }
         ]
     }

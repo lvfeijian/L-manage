@@ -4,7 +4,8 @@ import mutations from './mutations'
 export default {
     namespaced:true,
     state:{
-        massifDate:{}
+        massifDate:{},
+        gardenDetail:{}
     },
     mutations,
     actions
