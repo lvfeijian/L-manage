@@ -1,12 +1,18 @@
 const types = [
     'SET_TOKEN',//设置token和account
     'DEL_TOKEN',//删除token和account
-    'SET_PROGRESS',
-    'GET_WELCOME',//欢迎页面的数据
-    'GET_WELCOME_CHART',//欢迎界面的charts数据
-    'GET_MASSIFLIST',//果园列表的数据
-    'ADD_GARDEN_DATA',//添加果园
-    'GET_GARDEN_LIST',//通过id获取果园数据
+
+    //main界面
+    'GET_MENU_LIST',//获取左侧导航数据
+
+    //home模块
+    'GET_USER_LIST',//获取数据列表数据
+    'CHANGE_CURRENT_PAGE',//改变页码
+    'CHANGE_PAGE_SIZE',//改变每页的数据个数
+    'ADD_USER_LIST',//添加用户
+
+    //orchard模块
+    'GET_ROLE_LIST',//获取角色列表
 ]
 const typesObj = {}
 types.forEach(type => typesObj[type] = type)

@@ -43,8 +43,8 @@
                 checked: false,
                 // 双向绑定
                 loginForm: {
-                    user: '',
-                    pwd: ''
+                    user: 'admin',
+                    pwd: '123456'
                 },
                 //验证规则
                 formRules: {
@@ -74,26 +74,27 @@
                 })
             },
             //登录验证
-            async login() {
+            login() {
                 let data = {
-                    userAccount: this.loginForm.user,
-                    userPassword: this.$md5(this.loginForm.pwd),
-                    type: 1
+                    username: this.loginForm.user,
+                    password: this.loginForm.pwd
                 }
-                const res = await this.$axios({
-                    method:'post',
-                    url:'pc/user/v1/login/pcpass',
+                this.$axios({
+                    method: 'post',
+                    url: 'login',
                     data:data
+                }).then(res => {
+                    console.log(res);
+                    if (res.meta.status == 200) {
+                        this.$message.success('登录成功')
+                        this.$store.commit(types.SET_TOKEN, res.data)
+                        this.$router.push('/main')
+                    } else {
+                        this.$message.error('密码错误')
+                    }
                 })
-                if (res.status == 200) {
-                    this.$message.success("登录成功！")
-                    let account = res.data.user.account
-                    let token = res.data.user.authKey
-                    this.$store.commit(types.SET_TOKEN,{ account, token })
-                    this.$router.push('/home')
-                } else {
-                    this.$message.error("登录失败！")
-                }
+
+              
             }
 
         },

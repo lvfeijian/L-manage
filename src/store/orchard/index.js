@@ -1,12 +1,11 @@
 import actions from './actions'
 import mutations from './mutations'
 
-export default {
+export default{
     namespaced:true,
     state:{
-        massifDate:{},
-        gardenDetail:{}
+        rolelist:[],//所有角色用户列表数据
     },
-    mutations,
-    actions
+    actions,
+    mutations
 }

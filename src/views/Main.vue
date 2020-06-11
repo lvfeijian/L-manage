@@ -19,16 +19,16 @@
             <!-- 侧边栏 -->
             <el-aside :width="isCollapse ? '64px'  :  '260px'">
                 <div @click="toggleCollapse" class="toggle-collapse">|||</div>
-                <el-menu :default-openeds="['1']" background-color='#007766' text-color='#ccc' active-text-color='#fff'
+                <el-menu background-color='#007766' text-color='#ccc' active-text-color='#fff'
                     unique-opened :collapse="isCollapse" :collapse-transition="false" router>
-                    <template  v-for='(item,index) in routes'>
-                        <el-submenu :index="index+''" v-if='!item.isHide'>
+                    <template  v-for='(item,index) in menuList'>
+                        <el-submenu :index="index+''" :key='item.id' v-if='!item.isHide'>
                             <template slot="title">
-                                <i :class="item.iconcls"></i>
-                                <span>{{item.name}}</span>
+                                <i :class="iconFont[item.id]"></i>
+                                <span style='margin-left: 8px;'>{{item.authName}}</span>
                             </template>
-                            <el-menu-item :index="v.path" v-for='(v,i) in item.children'  v-if='!item.isHide'>
-                                <span>{{v.name}}</span>
+                            <el-menu-item :index="v.path" v-for='(v,i) in item.children' :key='v.id'  v-if='!item.isHide'>
+                                <span>{{v.authName}}</span>
                             </el-menu-item>
                         </el-submenu>
                         <el-menu-item v-else :index='item.children[0].path'>
@@ -58,14 +58,21 @@
 
 <script>
     import types from '@/store/constants/types'
+    import ns from     '@/store/constants/types'
+    import { mapState } from 'vuex'
+
     export default {
         name: 'Home',
+        computed: {
+            ...mapState(['menuList'])
+        },
         components: {},
         created() {
-
+            this.$store.dispatch(types.GET_MENU_LIST)
         },
         data() {
             return {
+                //没有给接口的时候自定义左侧菜单栏数据
                 routes: [
                     {
                         name: '首页',
@@ -74,7 +81,7 @@
                         isHide:true,
                         children:[
                             {
-                                path:'/welcome',
+                                path:'/home',
                                 name:'首页'
                             }
                         ]
@@ -85,11 +92,11 @@
                         path: '/',
                         children: [
                             {
-                                path: '/massifList',
+                                path: '/orchard',
                                 name: '果园列表'
                             },
                             {
-                                path: '/orchardList',
+                                path: '/massif',
                                 name: '地块列表'
                             }
                         ]
@@ -113,7 +120,14 @@
                         ]
                     }
                 ],
-                isCollapse: false,
+                isCollapse: false,//左侧菜单栏展开关闭切换，默认展开
+                iconFont:{
+                    125:'iconfont icon-RectangleCopy',
+                    103:'iconfont icon-quanxianguanli',
+                    101:'iconfont icon-shangpinguanli',
+                    102:'iconfont icon-dingdanguanli',
+                    145:'iconfont icon-shujutongji'
+                }
             }
         },
         mounted() {
@@ -164,6 +178,9 @@
 
         .el-aside {
             background-color: #007766;
+            .el-menu{
+                border-right: none;
+            }
             .toggle-collapse{
                 letter-spacing: 3px;
                 color:#ccc;

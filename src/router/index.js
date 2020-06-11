@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 //解决Vue中重复点击相同路由控制台报错问题
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error=> error)
+    return routerPush.call(this, location).catch(error => error)
 }
 Vue.use(VueRouter)
 
@@ -15,41 +15,75 @@ const routes = [
     },
     {
         path: '/login',
-        name: 'Login',
-        component: () => import('@/views/login/Login.vue')
+        name: 'login',
+        component: () => import('@/views/Login.vue')
     },
     {
-        path: '/home',
-        name: '首页',
+        path: '/main',
+        name: 'main',
         component: () => import('@/views/Main.vue'),
-        redirect:'/welcome',
-        children:[
+        redirect: '/users',
+        children: [
             {
-                path:'/welcome',
-                name: '欢迎界面',
-                component:() => import('@/views/home/Welcome.vue')
+                path: '/users',
+                name: 'home',
+                component: () => import('@/views/home/Home.vue')
             },
-           
+            {
+                path: '/roles',
+                name: 'orchard',
+                component: () => import('@/views/manage/Orchard.vue')
+            },
+            {
+                path: '/rights',
+                name: 'massif',
+                component: () => import('@/views/manage/Massif.vue')
+            },
+            // {
+            //     path: '/goods',
+            //     name: 'goods',
+            //     component: () => import('@/views/home/Home.vue')
+            // },
+            // {
+            //     path: '/params',
+            //     name: 'params',
+            //     component: () => import('@/views/manage/Orchard.vue')
+            // },
+            // {
+            //     path: '/categories',
+            //     name: 'categories',
+            //     component: () => import('@/views/manage/Massif.vue')
+            // },
+            // {
+            //     path: '/orders',
+            //     name: 'orders',
+            //     component: () => import('@/views/manage/Massif.vue')
+            // },
+            // {
+            //     path: '/reports',
+            //     name: 'reports',
+            //     component: () => import('@/views/manage/Massif.vue')
+            // }
         ]
     },
-    {
-        path: '/home',
-        name: '果园管理',
-        component: () => import('@/views/Main.vue'),
-        children:[
-            {
-                path:'/massifList',
-                name: '果园列表',
-                component:() => import('@/views/manage/massifList.vue')
-            },
-            {
-                path:'/orchardList',
-                name: '地块列表',
-                component:() => import('@/views/manage/orchardList.vue')
-            }
-        ]
-    }
-    
+    // {
+    //     path: '/main',
+    //     name: 'main',
+    //     component: () => import('@/views/Main.vue'),
+    //     children: [
+    //         {
+    //             path: '/orchard',
+    //             name: 'orchard',
+    //             component: () => import('@/views/manage/Orchard.vue')
+    //         },
+    //         {
+    //             path: '/massif',
+    //             name: 'massif',
+    //             component: () => import('@/views/manage/Massif.vue')
+    //         },
+    //     ]
+    // },
+
 ]
 
 const router = new VueRouter({

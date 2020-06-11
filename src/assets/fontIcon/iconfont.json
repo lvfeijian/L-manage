@@ -1,0 +1,72 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "410335",
+      "name": "权限管理",
+      "font_class": "quanxianguanli",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "414851",
+      "name": "商品管理",
+      "font_class": "shangpinguanli",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "553323",
+      "name": "姓名 用户名 昵称",
+      "font_class": "xingmingyonghumingnicheng",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "843326",
+      "name": "文本",
+      "font_class": "wenben",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
+      "icon_id": "1028365",
+      "name": "数据统计",
+      "font_class": "shujutongji",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "3717690",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "7473686",
+      "name": "订单管理",
+      "font_class": "dingdanguanli",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "7551131",
+      "name": "用户管理",
+      "font_class": "RectangleCopy",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "9512681",
+      "name": "眼睛",
+      "font_class": "view",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    }
+  ]
+}

@@ -19,7 +19,7 @@ module.exports = {
       disableHostCheck: true,
       proxy: {
           '/orchard': {
-              target: 'http://nanfeng.yufengtek.com/', // 生产环境
+              target: 'http://119.23.53.78:8888/', // 生产环境
               // target: 'http://trace.yufengtek.com/', // 生产环境
               // target: 'http://testorchdbs.yufengtek.com/', // 测试环境
               // target: 'http://192.168.1.117:8091/',

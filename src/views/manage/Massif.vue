@@ -1,13 +1,13 @@
 <template>
     <div>
-        orchardList
+        Massif
     </div>
 </template>
 
 <script>
-export default {
-    name:'orchardList',
-}
+    export default{
+        name:"Massif"
+    }
 </script>
 <style lang="scss">
     

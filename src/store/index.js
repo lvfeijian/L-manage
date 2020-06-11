@@ -8,9 +8,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    account: sessionStorage.getItem('account'),
+    username: sessionStorage.getItem('username'),
     token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
-    progress: 0, // 上传进度
+    menuList:[],//左侧列表数据
   },
   mutations,
   actions,

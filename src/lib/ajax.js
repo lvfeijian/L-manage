@@ -4,7 +4,7 @@ import store from '@/store/index'
 import types from '@/store/constants/types'
 
 const Qs = require('qs')
-axios.defaults.baseURL = '/orchard/pc/api/';
+axios.defaults.baseURL = 'http://119.23.53.78:8888/api/private/v1/';
 axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // 请求发送之前的拦截器
@@ -38,12 +38,12 @@ export default function (options) {
     return new Promise((resolve, reject) => {
         axios.request(options).then(res => {
             const resData = res.data
-            if (resData.status == '206' && resData.msg == '返回登陆页面') {
-                const currRouter = store.state.currRouter
-                if (currRouter.to != 'login') {
-                    currRouter.instance.push({ name: 'login' })
-                }
-            }
+            // if (resData.status == '206' && resData.msg == '返回登陆页面') {
+            //     const currRouter = store.state.currRouter
+            //     if (currRouter.to != 'login') {
+            //         currRouter.instance.push({ name: 'login' })
+            //     }
+            // }
             resolve(res.data)
         }, error => {
             reject(error)

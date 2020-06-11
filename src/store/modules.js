@@ -1,9 +1,8 @@
 import ns from '@/store/constants/ns'
-import welcome from './welcome/index'
-import massifList from './massifList'
+import home from './home/index'
+import orchard from './orchard'
 
 export default {
-    [ns.WELCOME]:welcome,
-    [ns.MASSIFLIST]:massifList
-
+    [ns.HOME]:home,
+    [ns.ORCHARD]:orchard
 }
